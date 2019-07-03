@@ -16,13 +16,19 @@
 <script>
 const imgs = [
   './assets/demo1.jpg',
+  './assets/demo2.jpg',
+  './assets/demo1.jpg',
+  './assets/demo2.jpg',
+  './assets/demo1.jpg',
+  './assets/demo2.jpg',
+  './assets/demo1.jpg',
   './assets/demo2.jpg'
 ];
 const queue = imgs.slice();
 
 let i = 0;
 setInterval(() => {
-  if (queue.length < 5) {
+  if (queue.length < 50) {
     queue.push(imgs[i % imgs.length]);
     i += 1;
   }
@@ -38,6 +44,7 @@ Slider({
   width: 400,
   sleep: (params.sleep | 0) || 2,
   dy: (params.dy | 0) || 1,
+  max: (params.max | 0) || 4,
   container: document.getElementById('container'),
   queue,
 });
