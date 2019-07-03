@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>图片平滑切换, 由下向上推送</title>
+<style>
+#container {
+  position: relative;
+  width: 400px;
+  height: 300px;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+<div id="container"></div>
+<script src="./browser.js"></script>
+<script>
+const imgs = [
+  './assets/demo1.jpg',
+  './assets/demo2.jpg'
+];
+const queue = imgs.slice();
+
+let i = 0;
+setInterval(() => {
+  if (queue.length < 5) {
+    queue.push(imgs[i % imgs.length]);
+    i += 1;
+  }
+}, 50);
+
+const params = {};
+location.search.slice(1).split('&').forEach(x => {
+  const [key, value] = x.split('=');
+  params[key] = decodeURIComponent(value);
+});
+
+Slider({
+  width: 400,
+  sleep: (params.sleep | 0) || 2,
+  dy: (params.dy | 0) || 1,
+  container: document.getElementById('container'),
+  queue,
+});
+</script>
+</body>
+</html>
+
