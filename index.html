@@ -7,11 +7,21 @@
   width: 400px;
   height: 300px;
   overflow: hidden;
+  float: left;
+  margin-right: 20px;
+}
+#container2 {
+  float: left;
+  position: relative;
+  width: 400px;
+  height: 300px;
+  overflow: hidden;
 }
 </style>
 </head>
 <body>
 <div id="container"></div>
+<div id="container2"></div>
 <script src="./browser.js"></script>
 <script>
 const imgs = [
@@ -25,12 +35,18 @@ const imgs = [
   './assets/demo2.jpg'
 ];
 const queue = imgs.slice();
+const queue2 = imgs.slice();
 
 let i = 0;
+let j = 0;
 setInterval(() => {
   if (queue.length < 50) {
     queue.push(imgs[i % imgs.length]);
     i += 1;
+  }
+  if (queue2.length < 50) {
+    queue2.push(imgs[j % imgs.length]);
+    j += 1;
   }
 }, 50);
 
@@ -48,7 +64,15 @@ Slider({
   container: document.getElementById('container'),
   queue,
 });
+
+Slider({
+  width: 400,
+  sleep: (params.sleep | 0) || 2,
+  dy: (params.dy | 0) || 1,
+  max: (params.max | 0) || 4,
+  container: document.getElementById('container2'),
+  queue: queue2,
+});
 </script>
 </body>
 </html>
-
